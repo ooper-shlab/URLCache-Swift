@@ -1,0 +1,323 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
+		1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF5F4DF0D08C38300B7A737 /* UIKit.framework */; };
+		8491FC230E255BB70064C040 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8491FC220E255BB70064C040 /* CoreGraphics.framework */; };
+		84963BE10E2BF6E700C6D3C9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 84963BE00E2BF6E700C6D3C9 /* Default.png */; };
+		84DC18860E0730F300516C1D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84DC18840E0730F300516C1D /* InfoPlist.strings */; };
+		84E8E3DA0E3546760040B308 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84E8E3D80E3546760040B308 /* Localizable.strings */; };
+		84F2147C0E09879C00BD3FD2 /* URLCache.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84F2147B0E09879C00BD3FD2 /* URLCache.plist */; };
+		84F216EE0E0C639400BD3FD2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F216ED0E0C639400BD3FD2 /* Icon.png */; };
+		D72B979D1B91E0A8002BA5B2 /* URLCacheController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CBDB051B80F6AD003CDF90 /* URLCacheController.swift */; settings = {ASSET_TAGS = (); }; };
+		D72B979F1B926DBD002BA5B2 /* URLCacheAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72B979E1B926DBD002BA5B2 /* URLCacheAppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
+		D72B97A21B9287EE002BA5B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72B97A01B9287EE002BA5B2 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		D7660C531B9BC86A0096903A /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = D7660C521B9BC86A0096903A /* README.md */; settings = {ASSET_TAGS = (); }; };
+		D7CBDB081B80F782003CDF90 /* URLCacheConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CBDB071B80F782003CDF90 /* URLCacheConnection.swift */; };
+		D7F5865F1B7BCBED0090654F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7F5865E1B7BCBED0090654F /* Default-568h@2x.png */; };
+		D7F586611B7BCF090090654F /* URLCacheAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F586601B7BCF090090654F /* URLCacheAlert.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		1D6058910D05DD3D006BFB54 /* URLCache.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = URLCache.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1DF5F4DF0D08C38300B7A737 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		8491FC220E255BB70064C040 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		84963BE00E2BF6E700C6D3C9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Default.png; path = Images/Default.png; sourceTree = "<group>"; };
+		84DC18850E0730F300516C1D /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		84E8E3D90E3546760040B308 /* en */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		84F20DBD0E2FF47A0079D805 /* ReadMe.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ReadMe.txt; sourceTree = "<group>"; };
+		84F2147B0E09879C00BD3FD2 /* URLCache.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = URLCache.plist; sourceTree = "<group>"; };
+		84F216ED0E0C639400BD3FD2 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Images/Icon.png; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D72B979E1B926DBD002BA5B2 /* URLCacheAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLCacheAppDelegate.swift; sourceTree = "<group>"; };
+		D72B97A11B9287EE002BA5B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D7660C521B9BC86A0096903A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D7CBDB051B80F6AD003CDF90 /* URLCacheController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLCacheController.swift; sourceTree = "<group>"; };
+		D7CBDB071B80F782003CDF90 /* URLCacheConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLCacheConnection.swift; sourceTree = "<group>"; };
+		D7F5865E1B7BCBED0090654F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		D7F586601B7BCF090090654F /* URLCacheAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLCacheAlert.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1D60588F0D05DD3D006BFB54 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
+				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
+				8491FC230E255BB70064C040 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				D7CBDB051B80F6AD003CDF90 /* URLCacheController.swift */,
+				D7F586601B7BCF090090654F /* URLCacheAlert.swift */,
+				D72B979E1B926DBD002BA5B2 /* URLCacheAppDelegate.swift */,
+				D7CBDB071B80F782003CDF90 /* URLCacheConnection.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1D6058910D05DD3D006BFB54 /* URLCache.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
+			isa = PBXGroup;
+			children = (
+				D7F5865E1B7BCBED0090654F /* Default-568h@2x.png */,
+				84F20DBD0E2FF47A0079D805 /* ReadMe.txt */,
+				D7660C521B9BC86A0096903A /* README.md */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				84F216EA0E0C636500BD3FD2 /* Images */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = CustomTemplate;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				84F2147B0E09879C00BD3FD2 /* URLCache.plist */,
+				84DC18840E0730F300516C1D /* InfoPlist.strings */,
+				8D1107310486CEB800E47090 /* Info.plist */,
+				84E8E3D80E3546760040B308 /* Localizable.strings */,
+				D72B97A01B9287EE002BA5B2 /* Main.storyboard */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8491FC220E255BB70064C040 /* CoreGraphics.framework */,
+				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
+				1D30AB110D05D00D00671497 /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		84F216EA0E0C636500BD3FD2 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				84963BE00E2BF6E700C6D3C9 /* Default.png */,
+				84F216ED0E0C639400BD3FD2 /* Icon.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1D6058900D05DD3D006BFB54 /* URLCache */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "URLCache" */;
+			buildPhases = (
+				1D60588D0D05DD3D006BFB54 /* Resources */,
+				1D60588E0D05DD3D006BFB54 /* Sources */,
+				1D60588F0D05DD3D006BFB54 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = URLCache;
+			productName = URLCache;
+			productReference = 1D6058910D05DD3D006BFB54 /* URLCache.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "URLCache" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+				en,
+			);
+			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1D6058900D05DD3D006BFB54 /* URLCache */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1D60588D0D05DD3D006BFB54 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84DC18860E0730F300516C1D /* InfoPlist.strings in Resources */,
+				84F2147C0E09879C00BD3FD2 /* URLCache.plist in Resources */,
+				84F216EE0E0C639400BD3FD2 /* Icon.png in Resources */,
+				84963BE10E2BF6E700C6D3C9 /* Default.png in Resources */,
+				D7F5865F1B7BCBED0090654F /* Default-568h@2x.png in Resources */,
+				D72B97A21B9287EE002BA5B2 /* Main.storyboard in Resources */,
+				84E8E3DA0E3546760040B308 /* Localizable.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1D60588E0D05DD3D006BFB54 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D72B979F1B926DBD002BA5B2 /* URLCacheAppDelegate.swift in Sources */,
+				D7CBDB081B80F782003CDF90 /* URLCacheConnection.swift in Sources */,
+				D72B979D1B91E0A8002BA5B2 /* URLCacheController.swift in Sources */,
+				D7F586611B7BCF090090654F /* URLCacheAlert.swift in Sources */,
+				D7660C531B9BC86A0096903A /* README.md in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		84DC18840E0730F300516C1D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84DC18850E0730F300516C1D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		84E8E3D80E3546760040B308 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				84E8E3D90E3546760040B308 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		D72B97A01B9287EE002BA5B2 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D72B97A11B9287EE002BA5B2 /* en */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		1D6058940D05DD3E006BFB54 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = URLCache_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:identifier}";
+				PRODUCT_NAME = URLCache;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1D6058950D05DD3E006BFB54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = URLCache_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:identifier}";
+				PRODUCT_NAME = URLCache;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PREBINDING = NO;
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "URLCache" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1D6058940D05DD3E006BFB54 /* Debug */,
+				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "URLCache" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

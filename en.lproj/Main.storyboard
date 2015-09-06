@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="9hA-wE-0P7">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+    </dependencies>
+    <scenes>
+        <!--URL Cache Controller-->
+        <scene sceneID="Ru6-09-sOd">
+            <objects>
+                <viewController id="9hA-wE-0P7" customClass="URLCacheController" customModule="URLCache" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1EV-RJ-yLY"/>
+                        <viewControllerLayoutGuide type="bottom" id="SXr-I8-WEW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="M8m-De-ac9">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Updated: Mon, Jul 18, 2008 10:46 AM" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drB-oi-sto">
+                                <rect key="frame" x="20" y="350" width="280" height="22"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleAspectFit" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ClH-NF-o9l" userLabel="MyImageView">
+                                <rect key="frame" x="20" y="40" width="280" height="280"/>
+                                <color key="backgroundColor" red="0.69019609999999998" green="0.73725492000000004" blue="0.80000000999999998" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." lineBreakMode="wordWrap" numberOfLines="3" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="r9o-kb-Etd">
+                                <rect key="frame" x="20" y="380" width="280" height="45"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="12"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Status message" lineBreakMode="tailTruncation" minimumFontSize="10" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W6o-cS-6FE">
+                                <rect key="frame" x="20" y="327" width="280" height="22"/>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="IOj-jj-GID">
+                                <rect key="frame" x="150" y="170" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6u-za-bnB">
+                                <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                                <items>
+                                    <barButtonItem title="Display Image" id="ia5-IQ-KlK">
+                                        <connections>
+                                            <action selector="onDisplayImage:" destination="9hA-wE-0P7" id="LD2-Kq-Hqs"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="ju7-WV-pad"/>
+                                    <barButtonItem title="Clear Cache" id="QYY-44-wxv">
+                                        <connections>
+                                            <action selector="onClearCache:" destination="9hA-wE-0P7" id="mIe-Tx-AGQ"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="F6u-za-bnB" secondAttribute="trailing" id="Tad-g2-XVz"/>
+                            <constraint firstItem="F6u-za-bnB" firstAttribute="bottom" secondItem="SXr-I8-WEW" secondAttribute="top" id="Yzj-uc-GJC"/>
+                            <constraint firstItem="F6u-za-bnB" firstAttribute="leading" secondItem="M8m-De-ac9" secondAttribute="leading" id="wy2-1d-GvE"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="IOj-jj-GID" id="gmx-mv-82h"/>
+                        <outlet property="dateField" destination="drB-oi-sto" id="g7l-wf-hKG"/>
+                        <outlet property="imageView" destination="ClH-NF-o9l" id="6Se-Lq-Bfp"/>
+                        <outlet property="infoField" destination="r9o-kb-Etd" id="8M7-tY-NCC"/>
+                        <outlet property="statusField" destination="W6o-cS-6FE" id="bj0-4m-QCd"/>
+                        <outlet property="toolbarItem1" destination="ia5-IQ-KlK" id="AFa-4u-nTn"/>
+                        <outlet property="toolbarItem2" destination="QYY-44-wxv" id="986-oH-e0w"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bXF-Mt-cJB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="199" y="359"/>
+        </scene>
+    </scenes>
+</document>
