@@ -17,7 +17,7 @@ To run this sample app, edit URLCache.plist & Info.plist, according to the image
 BUILD REQUIREMENTS
 ==================
 
-Xcode 7.0 beta 6, iOS SDK 9.0
+Xcode 7, iOS SDK 9.0
 
 
 RUNTIME REQUIREMENTS
