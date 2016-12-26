@@ -61,20 +61,20 @@ class URLCacheAppDelegate: NSObject, UIApplicationDelegate {
     @IBOutlet var window: UIWindow?
     
     
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //
         return true
     }
     
     
-    func applicationDidReceiveMemoryWarning(application: UIApplication) {
+    func applicationDidReceiveMemoryWarning(_ application: UIApplication) {
         /* In this method, the delegate tries to free up as much memory as possible.
         After the method returns (and the delegate returns from applicationWillTerminate:),
         the application is terminated. */
     }
     
     
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         /* save state as needed for next startup */
         
         /* To delete the disk cache directory when the application quits, uncomment
@@ -82,7 +82,7 @@ class URLCacheAppDelegate: NSObject, UIApplicationDelegate {
         
 //        let viewController = window!.rootViewController as! URLCacheController
 //        do {
-//            try NSFileManager.defaultManager().removeItemAtPath(viewController.dataPath)
+//            try FileManager.default.removeItem(atPath: viewController.dataPath)
 //        } catch let error {
 //            print(error)
 //        }

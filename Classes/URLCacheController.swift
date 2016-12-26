@@ -59,8 +59,8 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
     
     var dataPath: String!
     var filePath: String?
-    var fileDate: NSDate?
-    var urlArray: [NSURL] = []
+    var fileDate: Date?
+    var urlArray: [URL] = []
     var connection: URLCacheConnection?
     
     /* outlets */
@@ -87,10 +87,10 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
         
         /* turn off the NSURLCache shared cache */
         
-        let sharedCache = NSURLCache(memoryCapacity: 0,
+        let sharedCache = Foundation.URLCache(memoryCapacity: 0,
             diskCapacity: 0,
             diskPath: nil)
-        NSURLCache.setSharedURLCache(sharedCache)
+        Foundation.URLCache.shared = sharedCache
         
         /* prepare to use our own on-disk cache */
         self.initCache()
@@ -99,13 +99,13 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
         
         //URL contained in the original URLCache.plist:
         //http://www.osei.noaa.gov/IOD/OSEIiod.jpg
-        if let url = NSBundle.mainBundle().URLForResource("URLCache", withExtension: "plist") {
-            let array = NSArray(contentsOfURL: url)!
-            self.urlArray = array.map {element in NSURL(string: element as! String)!}
+        if let url = Bundle.main.url(forResource: "URLCache", withExtension: "plist") {
+            let array = NSArray(contentsOf: url)!
+            self.urlArray = array.map {element in URL(string: element as! String)!}
         }
         
         /* set the view's background to gray pinstripe */
-        self.view.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        self.view.backgroundColor = UIColor.groupTableViewBackground
         
         /* set initial state of network activity indicators */
         self.stopAnimation()
@@ -138,7 +138,7 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
         let message = NSLocalizedString("Do you really want to clear the cache?",
             comment: "Clear Cache alert message")
         
-        URLCacheAlertWithMessageAndDelegate(message, self)
+        self.present(URLCacheAlertWithMessageAndDelegate(message, self), animated: true, completion: nil)
         
         /* We handle the user response to this alert in the UIAlertViewDelegate
         method alertView:clickedButtonAtIndex: at the end of this file. */
@@ -168,8 +168,8 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
     
     private func startAnimation() {
         self.activityIndicator.startAnimating()
-        let application = UIApplication.sharedApplication()
-        application.networkActivityIndicatorVisible = true
+        let application = UIApplication.shared
+        application.isNetworkActivityIndicatorVisible = true
     }
     
     
@@ -177,36 +177,36 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
     
     private func stopAnimation() {
         self.activityIndicator.stopAnimating()
-        let application = UIApplication.sharedApplication()
-        application.networkActivityIndicatorVisible = false
+        let application = UIApplication.shared
+        application.isNetworkActivityIndicatorVisible = false
     }
     
     
     /* enable or disable all toolbar buttons */
     
-    private func buttonsEnabled(flag: Bool) {
-        toolbarItem1.enabled = flag
-        toolbarItem2.enabled = flag
+    private func buttonsEnabled(_ flag: Bool) {
+        toolbarItem1.isEnabled = flag
+        toolbarItem2.isEnabled = flag
     }
     
     
     private func initCache() {
         /* create path to cache directory inside the application's Documents directory */
-        let paths = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)
-        self.dataPath = (paths[0] as NSString).stringByAppendingPathComponent("URLCache")
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+        self.dataPath = (paths[0] as NSString).appendingPathComponent("URLCache")
         
         /* check for existence of cache directory */
-        if NSFileManager.defaultManager().fileExistsAtPath(dataPath) {
+        if FileManager.default.fileExists(atPath: dataPath) {
             return
         }
         
         /* create a new cache directory */
         do {
-            try NSFileManager.defaultManager().createDirectoryAtPath(dataPath,
+            try FileManager.default.createDirectory(atPath: dataPath,
                 withIntermediateDirectories: false,
                 attributes: nil)
         } catch let error as NSError {
-            URLCacheAlertWithError(error)
+            self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
             return
         }
     }
@@ -214,22 +214,22 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
     
     /* removes every file in the cache directory */
     
-    private func clearCache() {
+    fileprivate func clearCache() {
         /* remove the cache directory and its contents */
         do {
-            try NSFileManager.defaultManager().removeItemAtPath(dataPath)
+            try FileManager.default.removeItem(atPath: dataPath)
         } catch let error as NSError {
-            URLCacheAlertWithError(error)
+            self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
             return
         }
         
         /* create a new cache directory */
         do {
-            try NSFileManager.defaultManager().createDirectoryAtPath(dataPath,
+            try FileManager.default.createDirectory(atPath: dataPath,
                 withIntermediateDirectories: false,
                 attributes: nil)
         } catch let error as NSError {
-            URLCacheAlertWithError(error)
+            self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
             return
         }
         
@@ -242,15 +242,15 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
     private func getFileModificationDate() {
         /* default date if file doesn't exist (not an error) */
         guard let filePath = self.filePath else {return}
-        self.fileDate = NSDate(timeIntervalSinceReferenceDate: 0)
+        self.fileDate = Date(timeIntervalSinceReferenceDate: 0)
         
-        if NSFileManager.defaultManager().fileExistsAtPath(filePath) {
+        if FileManager.default.fileExists(atPath: filePath) {
             /* retrieve file attributes */
             do {
-                let attributes = try NSFileManager.defaultManager().attributesOfItemAtPath(filePath)
+                let attributes = try FileManager.default.attributesOfItem(atPath: filePath)
                 self.fileDate = (attributes as NSDictionary).fileModificationDate()
             } catch let error as NSError {
-                URLCacheAlertWithError(error)
+                self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
             }
         }
     }
@@ -258,11 +258,11 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
     
     /* display new or existing cached image */
     
-    private func displayImageWithURL(theURL: NSURL) {
+    private func displayImageWithURL(_ theURL: URL) {
         /* get the path to the cached image */
         
-        let fileName = theURL.lastPathComponent!
-        filePath = (dataPath as NSString).stringByAppendingPathComponent(fileName)
+        let fileName = theURL.lastPathComponent
+        filePath = (dataPath as NSString).appendingPathComponent(fileName)
         
         /* apply daily time interval policy */
         
@@ -277,7 +277,11 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
             self.initUI()
             self.buttonsEnabled(false)
             self.startAnimation()
-            self.connection = URLCacheConnection(URL: theURL, delegate: self)
+            do {
+                self.connection = try URLCacheConnection(url: theURL, delegate: self)
+            } catch URLCacheConnectionError.failed(let message) {
+                self.present(URLCacheAlertWithMessage(message), animated: true, completion: nil)
+            } catch {}
         } else {
             statusField.text = NSLocalizedString ("Previously cached image",
                 comment: "Image found in cache and updated in last 24 hours.")
@@ -298,10 +302,10 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
         /* format the file modification date for display in Updated field */
         /* NSDateFormatterStyle options give meaningful results in all locales */
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeStyle = .ShortStyle
-        dateFormatter.dateStyle = .MediumStyle
-        dateField.text = "Updated: \(dateFormatter.stringFromDate(fileDate!))"
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short
+        dateFormatter.dateStyle = .medium
+        dateField.text = "Updated: \(dateFormatter.string(from: fileDate!))"
         
         /* display the file as an image */
         
@@ -320,34 +324,35 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
     //MARK: -
     //MARK: URLCacheConnectionDelegate methods
     
-    func connectionDidFail(theConnection: URLCacheConnection) {
+    func connectionDidFail(_ theConnection: URLCacheConnection, error: Error) {
+        self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
         self.stopAnimation()
         self.buttonsEnabled(true)
     }
     
     
-    func connectionDidFinish(theConnection: URLCacheConnection) {
-        if NSFileManager.defaultManager().fileExistsAtPath(filePath!) {
+    func connectionDidFinish(_ theConnection: URLCacheConnection) {
+        if FileManager.default.fileExists(atPath: filePath!) {
             
             /* apply the modified date policy */
             
             self.getFileModificationDate()
             let result = theConnection.lastModified!.compare(fileDate!)
-            if result == .OrderedDescending {
+            if result == .orderedDescending {
                 /* file is outdated, so remove it */
                 do {
-                    try NSFileManager.defaultManager().removeItemAtPath(filePath!)
-                } catch let error as NSError {
-                    URLCacheAlertWithError(error)
+                    try FileManager.default.removeItem(atPath: filePath!)
+                } catch let error {
+                    self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
                 }
                 
             }
         }
         
-        if !NSFileManager.defaultManager().fileExistsAtPath(filePath!) {
+        if !FileManager.default.fileExists(atPath: filePath!) {
             /* file doesn't exist, so create it */
-            NSFileManager.defaultManager().createFileAtPath(filePath!,
-                contents: theConnection.receivedData,
+            FileManager.default.createFile(atPath: filePath!,
+                contents: theConnection.receivedData as Data?,
                 attributes: nil)
             
             statusField.text = NSLocalizedString("Newly cached image",
@@ -359,11 +364,11 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
         
         /* reset the file's modification date to indicate that the URL has been checked */
         
-        let dict: [String: AnyObject] = [NSFileModificationDate : NSDate()]
+        let dict: [FileAttributeKey: Any] = [FileAttributeKey.modificationDate: Date()]
         do {
-            try NSFileManager.defaultManager().setAttributes(dict, ofItemAtPath: filePath!)
-        } catch let error as NSError {
-            URLCacheAlertWithError(error)
+            try FileManager.default.setAttributes(dict, ofItemAtPath: filePath!)
+        } catch let error {
+            self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
         }
         
         self.stopAnimation()
@@ -380,7 +385,7 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
     //MARK: -
     //MARK: UIAlertViewDelegate
     
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int) {
+    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int) {
         if buttonIndex == 0 {
             /* the user clicked the Cancel button */
             return
@@ -390,9 +395,9 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
     }
     
 }
-@available(iOS 8.0, *)
+//@available(iOS 8.0, *)
 extension URLCacheController: UIAlertControllerDelegate {
-    func alertController(alertController: UIAlertController, clickedButtonAtIndex buttonIndex: Int) {
+    func alertController(_ alertController: UIAlertController, clickedButtonAtIndex buttonIndex: Int) {
         if buttonIndex == 0 {
             return
         }

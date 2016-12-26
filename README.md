@@ -10,17 +10,17 @@ As this is a line-by-line translation from the original sample code, "redistribu
 Some faults caused by my translation may exist. Not all features tested.
 You should not contact to Apple or SHLab(jp) about any faults caused by my translation.
 
-To run this sample app, edit URLCache.plist & Info.plist, according to the image URL you want to load.
+**To run this sample app, edit URLCache.plist & Info.plist, according to the image URL you want to load.**
 
 
 
 BUILD REQUIREMENTS
 ==================
 
-Xcode 7, iOS SDK 9.0
+Xcode 8.2.1, iOS SDK 10
 
 
 RUNTIME REQUIREMENTS
 ====================
 
-iOS 7
+iOS 8

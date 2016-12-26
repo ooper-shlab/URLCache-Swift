@@ -58,61 +58,63 @@ import UIKit
 
 @available(iOS 8.0, *)
 @objc protocol UIAlertControllerDelegate {
-    optional
-    func alertController(alertController: UIAlertController, clickedButtonAtIndex buttonIndex: Int)
+    @objc optional
+    func alertController(_ alertController: UIAlertController, clickedButtonAtIndex buttonIndex: Int)
 }
 
 
-func URLCacheAlertWithError(error: NSError) {
-    let message = "Error! \(error.localizedDescription) \(error.localizedFailureReason)"
+func URLCacheAlertWithError(_ error: Error) -> UIAlertController {
+    let message = "Error! \(error.localizedDescription) \((error as NSError).localizedFailureReason)"
     
-    URLCacheAlertWithMessage(message)
+    return URLCacheAlertWithMessage(message)
 }
 
 
-@available(iOS 8.0, *)
-private func showAlert(alertController: UIAlertController) {
-    let viewController = UIApplication.sharedApplication().delegate!.window!!.rootViewController!
-    viewController.presentViewController(alertController, animated: true, completion: nil)
-}
-func URLCacheAlertWithMessage(message: String) {
+//@available(iOS 8.0, *)
+//private func showAlert(_ alertController: UIAlertController) {
+//    let viewController = UIApplication.shared.delegate!.window!!.rootViewController!
+//    viewController.present(alertController, animated: true, completion: nil)
+//}
+func URLCacheAlertWithMessage(_ message: String) -> UIAlertController {
     /* open an alert with an OK button */
-    if #available(iOS 8.0, *) {
+//    if #available(iOS 8.0, *) {
         let alertController = UIAlertController(title: "URLCache",
             message: message,
-            preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .Cancel, handler: nil))
-        showAlert(alertController)
-    } else {
-        let alert = UIAlertView(title: "URLCache",
-            message: message,
-            delegate: nil,
-            cancelButtonTitle: "OK")
-        alert.show()
-    }
+            preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+    return alertController
+//        showAlert(alertController)
+//    } else {
+//        let alert = UIAlertView(title: "URLCache",
+//            message: message,
+//            delegate: nil,
+//            cancelButtonTitle: "OK")
+//        alert.show()
+//    }
 }
 
 
-func URLCacheAlertWithMessageAndDelegate(message: String, _ delegate: AnyObject) {
+func URLCacheAlertWithMessageAndDelegate(_ message: String, _ delegate: AnyObject) -> UIAlertController {
     /* open an alert with OK and Cancel buttons */
-    if #available(iOS 8.0, *) {
+//    if #available(iOS 8.0, *) {
         let alertControllerDelegate = delegate as! UIAlertControllerDelegate
         let alertController = UIAlertController(title: "URLCache",
             message: message,
-            preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: {action in
+            preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel) {action in
             alertControllerDelegate.alertController?(alertController, clickedButtonAtIndex: 0)
-        }))
-        alertController.addAction(UIAlertAction(title: "OK", style: .Default, handler: {action in
+        })
+        alertController.addAction(UIAlertAction(title: "OK", style: .default) {action in
             alertControllerDelegate.alertController?(alertController, clickedButtonAtIndex: 1)
-        }))
-        showAlert(alertController)
-    } else {
-        let alert = UIAlertView(title: "URLCache",
-            message: message,
-            delegate: delegate,
-            cancelButtonTitle: "Cancel")
-        alert.addButtonWithTitle("OK")
-        alert.show()
-    }
+        })
+    return alertController
+//        showAlert(alertController)
+//    } else {
+//        let alert = UIAlertView(title: "URLCache",
+//            message: message,
+//            delegate: delegate,
+//            cancelButtonTitle: "Cancel")
+//        alert.addButton(withTitle: "OK")
+//        alert.show()
+//    }
 }

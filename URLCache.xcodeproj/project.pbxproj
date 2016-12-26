@@ -15,9 +15,9 @@
 		84E8E3DA0E3546760040B308 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 84E8E3D80E3546760040B308 /* Localizable.strings */; };
 		84F2147C0E09879C00BD3FD2 /* URLCache.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84F2147B0E09879C00BD3FD2 /* URLCache.plist */; };
 		84F216EE0E0C639400BD3FD2 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F216ED0E0C639400BD3FD2 /* Icon.png */; };
-		D72B979D1B91E0A8002BA5B2 /* URLCacheController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CBDB051B80F6AD003CDF90 /* URLCacheController.swift */; settings = {ASSET_TAGS = (); }; };
-		D72B979F1B926DBD002BA5B2 /* URLCacheAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72B979E1B926DBD002BA5B2 /* URLCacheAppDelegate.swift */; settings = {ASSET_TAGS = (); }; };
-		D72B97A21B9287EE002BA5B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72B97A01B9287EE002BA5B2 /* Main.storyboard */; settings = {ASSET_TAGS = (); }; };
+		D72B979D1B91E0A8002BA5B2 /* URLCacheController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CBDB051B80F6AD003CDF90 /* URLCacheController.swift */; };
+		D72B979F1B926DBD002BA5B2 /* URLCacheAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72B979E1B926DBD002BA5B2 /* URLCacheAppDelegate.swift */; };
+		D72B97A21B9287EE002BA5B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72B97A01B9287EE002BA5B2 /* Main.storyboard */; };
 		D7CBDB081B80F782003CDF90 /* URLCacheConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CBDB071B80F782003CDF90 /* URLCacheConnection.swift */; };
 		D7F5865F1B7BCBED0090654F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7F5865E1B7BCBED0090654F /* Default-568h@2x.png */; };
 		D7F586611B7BCF090090654F /* URLCacheAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F586601B7BCF090090654F /* URLCacheAlert.swift */; };
@@ -150,7 +150,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
+				LastUpgradeCheck = 0820;
+				TargetAttributes = {
+					1D6058900D05DD3D006BFB54 = {
+						LastSwiftMigration = 0820;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "URLCache" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -242,11 +247,12 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = URLCache_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = URLCache;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -259,22 +265,39 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = URLCache_Prefix.pch;
 				INFOPLIST_FILE = Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yourcompany.${PRODUCT_NAME:identifier}";
 				PRODUCT_NAME = URLCache;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
 		C01FCF4F08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
@@ -284,13 +307,30 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				PREBINDING = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 			};
 			name = Release;
 		};

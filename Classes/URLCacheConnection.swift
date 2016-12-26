@@ -61,9 +61,13 @@ let NSURLResponseUnknownLength = Int64(-1)
 @objc(URLCacheConnectionDelegate)
 protocol URLCacheConnectionDelegate: NSObjectProtocol {
     
-    func connectionDidFail(theConnection: URLCacheConnection)
-    func connectionDidFinish(theConnection: URLCacheConnection)
+    func connectionDidFail(_ theConnection: URLCacheConnection, error: Error)
+    func connectionDidFinish(_ theConnection: URLCacheConnection)
     
+}
+
+enum URLCacheConnectionError: Error {
+    case failed(String)
 }
 
 
@@ -71,8 +75,8 @@ protocol URLCacheConnectionDelegate: NSObjectProtocol {
 class URLCacheConnection: NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate {
     
     weak var delegate: URLCacheConnectionDelegate!
-    var receivedData: NSMutableData?
-    var lastModified: NSDate?
+    var receivedData: Data?
+    var lastModified: Date?
     var connection: NSURLConnection!
     
     
@@ -80,7 +84,7 @@ class URLCacheConnection: NSObject, NSURLConnectionDataDelegate, NSURLConnection
     and we implement a set of delegate methods that act as callbacks during
     the load. */
     
-    init(URL theURL: NSURL, delegate theDelegate: URLCacheConnectionDelegate) {
+    init(url theURL: URL, delegate theDelegate: URLCacheConnectionDelegate) throws {
         
         self.delegate = theDelegate
         super.init()
@@ -89,8 +93,8 @@ class URLCacheConnection: NSObject, NSURLConnectionDataDelegate, NSURLConnection
         disk or memory cache, so our cache policy is to satisfy the request
         by loading the data from its source. */
         
-        let theRequest = NSURLRequest(URL: theURL,
-            cachePolicy: NSURLRequestCachePolicy.ReloadIgnoringLocalCacheData,
+        let theRequest = URLRequest(url: theURL,
+            cachePolicy: .reloadIgnoringLocalCacheData,
             timeoutInterval: 60)
         
         /* Create the connection with the request and start loading the
@@ -102,7 +106,8 @@ class URLCacheConnection: NSObject, NSURLConnectionDataDelegate, NSURLConnection
             /* inform the user that the connection failed */
             let message = NSLocalizedString ("Unable to initiate request.",
                 comment: "NSURLConnection initialization method failed.")
-            URLCacheAlertWithMessage(message)
+            throw URLCacheConnectionError.failed(message)
+//            URLCacheAlertWithMessage(message)
         }
         
     }
@@ -110,7 +115,7 @@ class URLCacheConnection: NSObject, NSURLConnectionDataDelegate, NSURLConnection
     
     //MARK: NSURLConnection delegate methods
     
-    func connection(connection: NSURLConnection, didReceiveResponse response: NSURLResponse) {
+    func connection(_ connection: NSURLConnection, didReceive response: URLResponse) {
         /* This method is called when the server has determined that it has
         enough information to create the NSURLResponse. It can be called
         multiple times, for example in the case of a redirect, so each time
@@ -122,48 +127,48 @@ class URLCacheConnection: NSObject, NSURLConnectionDataDelegate, NSURLConnection
         if contentLength == NSURLResponseUnknownLength {
             contentLength = 500000
         }
-        self.receivedData = NSMutableData(capacity: Int(contentLength))
+        self.receivedData = Data(capacity: Int(contentLength))
         
         /* Try to retrieve last modified date from HTTP header. If found, format
         date so it matches format of cached image file modification date. */
         
-        if let response = response as? NSHTTPURLResponse {
+        if let response = response as? HTTPURLResponse {
             let headers = response.allHeaderFields
             if let modified = headers["Last-Modified"] as! String? {
-                let dateFormatter = NSDateFormatter()
+                let dateFormatter = DateFormatter()
                 
                 /* avoid problem if the user's locale is incompatible with HTTP-style dates */
-                dateFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX")
+                dateFormatter.locale = Locale(identifier: "en_US_POSIX")
                 
                 dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
-                self.lastModified = dateFormatter.dateFromString(modified)
+                self.lastModified = dateFormatter.date(from: modified)
             } else {
                 /* default if last modified date doesn't exist (not an error) */
-                self.lastModified = NSDate(timeIntervalSinceReferenceDate: 0)
+                self.lastModified = Date(timeIntervalSinceReferenceDate: 0)
             }
         }
     }
     
     
-    func connection(connection: NSURLConnection, didReceiveData data: NSData) {
+    func connection(_ connection: NSURLConnection, didReceive data: Data) {
         /* Append the new data to the received data. */
-        self.receivedData?.appendData(data)
+        self.receivedData?.append(data)
     }
     
     
-    func connection(connection: NSURLConnection, didFailWithError error: NSError) {
-        URLCacheAlertWithError(error)
-        self.delegate.connectionDidFail(self)
+    func connection(_ connection: NSURLConnection, didFailWithError error: Error) {
+//        URLCacheAlertWithError(error)
+        self.delegate.connectionDidFail(self, error: error)
     }
     
     
-    func connection(connection: NSURLConnection, willCacheResponse cachedResponse: NSCachedURLResponse) -> NSCachedURLResponse? {
+    func connection(_ connection: NSURLConnection, willCacheResponse cachedResponse: CachedURLResponse) -> CachedURLResponse? {
         /* this application does not use a NSURLCache disk or memory cache */
         return nil
     }
     
     
-    func connectionDidFinishLoading(connection: NSURLConnection) {
+    func connectionDidFinishLoading(_ connection: NSURLConnection) {
         self.delegate.connectionDidFinish(self)
     }
     
