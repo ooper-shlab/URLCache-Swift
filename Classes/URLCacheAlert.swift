@@ -56,7 +56,6 @@ Copyright (C) 2008-2010 Apple Inc. All Rights Reserved.
 import UIKit
 
 
-@available(iOS 8.0, *)
 @objc protocol UIAlertControllerDelegate {
     @objc optional
     func alertController(_ alertController: UIAlertController, clickedButtonAtIndex buttonIndex: Int)
@@ -70,34 +69,18 @@ func URLCacheAlertWithError(_ error: Error) -> UIAlertController {
 }
 
 
-//@available(iOS 8.0, *)
-//private func showAlert(_ alertController: UIAlertController) {
-//    let viewController = UIApplication.shared.delegate!.window!!.rootViewController!
-//    viewController.present(alertController, animated: true, completion: nil)
-//}
 func URLCacheAlertWithMessage(_ message: String) -> UIAlertController {
     /* open an alert with an OK button */
-//    if #available(iOS 8.0, *) {
         let alertController = UIAlertController(title: "URLCache",
             message: message,
             preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
     return alertController
-//        showAlert(alertController)
-//    } else {
-//        let alert = UIAlertView(title: "URLCache",
-//            message: message,
-//            delegate: nil,
-//            cancelButtonTitle: "OK")
-//        alert.show()
-//    }
 }
 
 
-func URLCacheAlertWithMessageAndDelegate(_ message: String, _ delegate: AnyObject) -> UIAlertController {
+func URLCacheAlertWithMessageAndDelegate(_ message: String, _ alertControllerDelegate: UIAlertControllerDelegate) -> UIAlertController {
     /* open an alert with OK and Cancel buttons */
-//    if #available(iOS 8.0, *) {
-        let alertControllerDelegate = delegate as! UIAlertControllerDelegate
         let alertController = UIAlertController(title: "URLCache",
             message: message,
             preferredStyle: .alert)
@@ -108,13 +91,19 @@ func URLCacheAlertWithMessageAndDelegate(_ message: String, _ delegate: AnyObjec
             alertControllerDelegate.alertController?(alertController, clickedButtonAtIndex: 1)
         })
     return alertController
-//        showAlert(alertController)
-//    } else {
-//        let alert = UIAlertView(title: "URLCache",
-//            message: message,
-//            delegate: delegate,
-//            cancelButtonTitle: "Cancel")
-//        alert.addButton(withTitle: "OK")
-//        alert.show()
-//    }
+}
+
+extension UIViewController {
+    func presentAlert(error: Error) {
+        let alertController = URLCacheAlertWithError(error)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    func presentAlert(message: String) {
+        let alertController = URLCacheAlertWithMessage(message)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    func presentAlert(message: String, delegate: UIAlertControllerDelegate) {
+        let alertController = URLCacheAlertWithMessageAndDelegate(message, delegate)
+        self.present(alertController, animated: true, completion: nil)
+    }
 }

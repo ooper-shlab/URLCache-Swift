@@ -138,7 +138,7 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
         let message = NSLocalizedString("Do you really want to clear the cache?",
             comment: "Clear Cache alert message")
         
-        self.present(URLCacheAlertWithMessageAndDelegate(message, self), animated: true, completion: nil)
+        self.presentAlert(message: message, delegate: self)
         
         /* We handle the user response to this alert in the UIAlertViewDelegate
         method alertView:clickedButtonAtIndex: at the end of this file. */
@@ -205,8 +205,8 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
             try FileManager.default.createDirectory(atPath: dataPath,
                 withIntermediateDirectories: false,
                 attributes: nil)
-        } catch let error as NSError {
-            self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
+        } catch let error {
+            self.presentAlert(error: error)
             return
         }
     }
@@ -218,8 +218,8 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
         /* remove the cache directory and its contents */
         do {
             try FileManager.default.removeItem(atPath: dataPath)
-        } catch let error as NSError {
-            self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
+        } catch let error {
+            self.presentAlert(error: error)
             return
         }
         
@@ -228,8 +228,8 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
             try FileManager.default.createDirectory(atPath: dataPath,
                 withIntermediateDirectories: false,
                 attributes: nil)
-        } catch let error as NSError {
-            self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
+        } catch let error {
+            self.presentAlert(error: error)
             return
         }
         
@@ -249,8 +249,8 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
             do {
                 let attributes = try FileManager.default.attributesOfItem(atPath: filePath)
                 self.fileDate = (attributes as NSDictionary).fileModificationDate()
-            } catch let error as NSError {
-                self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
+            } catch let error {
+                self.presentAlert(error: error)
             }
         }
     }
@@ -280,7 +280,7 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
             do {
                 self.connection = try URLCacheConnection(url: theURL, delegate: self)
             } catch URLCacheConnectionError.failed(let message) {
-                self.present(URLCacheAlertWithMessage(message), animated: true, completion: nil)
+                self.presentAlert(message: message)
             } catch {}
         } else {
             statusField.text = NSLocalizedString ("Previously cached image",
@@ -325,7 +325,7 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
     //MARK: URLCacheConnectionDelegate methods
     
     func connectionDidFail(_ theConnection: URLCacheConnection, error: Error) {
-        self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
+        self.presentAlert(error: error)
         self.stopAnimation()
         self.buttonsEnabled(true)
     }
@@ -343,7 +343,7 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
                 do {
                     try FileManager.default.removeItem(atPath: filePath!)
                 } catch let error {
-                    self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
+                    self.presentAlert(error: error)
                 }
                 
             }
@@ -368,7 +368,7 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
         do {
             try FileManager.default.setAttributes(dict, ofItemAtPath: filePath!)
         } catch let error {
-            self.present(URLCacheAlertWithError(error), animated: true, completion: nil)
+            self.presentAlert(error: error)
         }
         
         self.stopAnimation()

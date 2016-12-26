@@ -18,8 +18,9 @@
 		D72B979D1B91E0A8002BA5B2 /* URLCacheController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CBDB051B80F6AD003CDF90 /* URLCacheController.swift */; };
 		D72B979F1B926DBD002BA5B2 /* URLCacheAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D72B979E1B926DBD002BA5B2 /* URLCacheAppDelegate.swift */; };
 		D72B97A21B9287EE002BA5B2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72B97A01B9287EE002BA5B2 /* Main.storyboard */; };
+		D72E1E401E10BF2700817B4B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D72E1E3E1E10BF2700817B4B /* LaunchScreen.storyboard */; };
+		D72E1E421E10BF4A00817B4B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D72E1E411E10BF4A00817B4B /* Images.xcassets */; };
 		D7CBDB081B80F782003CDF90 /* URLCacheConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CBDB071B80F782003CDF90 /* URLCacheConnection.swift */; };
-		D7F5865F1B7BCBED0090654F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D7F5865E1B7BCBED0090654F /* Default-568h@2x.png */; };
 		D7F586611B7BCF090090654F /* URLCacheAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7F586601B7BCF090090654F /* URLCacheAlert.swift */; };
 /* End PBXBuildFile section */
 
@@ -37,10 +38,11 @@
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D72B979E1B926DBD002BA5B2 /* URLCacheAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLCacheAppDelegate.swift; sourceTree = "<group>"; };
 		D72B97A11B9287EE002BA5B2 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/Main.storyboard; sourceTree = "<group>"; };
+		D72E1E3F1E10BF2700817B4B /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		D72E1E411E10BF4A00817B4B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = URLCache/Images.xcassets; sourceTree = "<group>"; };
 		D7660C521B9BC86A0096903A /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D7CBDB051B80F6AD003CDF90 /* URLCacheController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLCacheController.swift; sourceTree = "<group>"; };
 		D7CBDB071B80F782003CDF90 /* URLCacheConnection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLCacheConnection.swift; sourceTree = "<group>"; };
-		D7F5865E1B7BCBED0090654F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D7F586601B7BCF090090654F /* URLCacheAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLCacheAlert.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -80,7 +82,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				D7F5865E1B7BCBED0090654F /* Default-568h@2x.png */,
 				84F20DBD0E2FF47A0079D805 /* ReadMe.txt */,
 				D7660C521B9BC86A0096903A /* README.md */,
 				080E96DDFE201D6D7F000001 /* Classes */,
@@ -95,11 +96,13 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				D72E1E411E10BF4A00817B4B /* Images.xcassets */,
 				84F2147B0E09879C00BD3FD2 /* URLCache.plist */,
 				84DC18840E0730F300516C1D /* InfoPlist.strings */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				84E8E3D80E3546760040B308 /* Localizable.strings */,
 				D72B97A01B9287EE002BA5B2 /* Main.storyboard */,
+				D72E1E3E1E10BF2700817B4B /* LaunchScreen.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -182,11 +185,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D72E1E421E10BF4A00817B4B /* Images.xcassets in Resources */,
 				84DC18860E0730F300516C1D /* InfoPlist.strings in Resources */,
+				D72E1E401E10BF2700817B4B /* LaunchScreen.storyboard in Resources */,
 				84F2147C0E09879C00BD3FD2 /* URLCache.plist in Resources */,
 				84F216EE0E0C639400BD3FD2 /* Icon.png in Resources */,
 				84963BE10E2BF6E700C6D3C9 /* Default.png in Resources */,
-				D7F5865F1B7BCBED0090654F /* Default-568h@2x.png in Resources */,
 				D72B97A21B9287EE002BA5B2 /* Main.storyboard in Resources */,
 				84E8E3DA0E3546760040B308 /* Localizable.strings in Resources */,
 			);
@@ -233,6 +237,14 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
+		D72E1E3E1E10BF2700817B4B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D72E1E3F1E10BF2700817B4B /* en */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -240,6 +252,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -260,6 +273,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;

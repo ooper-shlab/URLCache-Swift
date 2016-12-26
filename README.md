@@ -11,7 +11,7 @@ Some faults caused by my translation may exist. Not all features tested.
 You should not contact to Apple or SHLab(jp) about any faults caused by my translation.
 
 **To run this sample app, edit URLCache.plist & Info.plist, according to the image URL you want to load.**
-
+(CAUTION: The settings need to be valid for all redirected URLs, when the server returns redirection responses.)
 
 
 BUILD REQUIREMENTS

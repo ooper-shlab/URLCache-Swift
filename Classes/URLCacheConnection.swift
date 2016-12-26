@@ -72,12 +72,13 @@ enum URLCacheConnectionError: Error {
 
 
 @objc(URLCacheConnection)
-class URLCacheConnection: NSObject, NSURLConnectionDataDelegate, NSURLConnectionDelegate {
+class URLCacheConnection: NSObject,/* NSURLConnectionDataDelegate, NSURLConnectionDelegate,*/ URLSessionTaskDelegate, URLSessionDataDelegate {
     
     weak var delegate: URLCacheConnectionDelegate!
     var receivedData: Data?
     var lastModified: Date?
-    var connection: NSURLConnection!
+//    var connection: NSURLConnection!
+    var dataTask: URLSessionDataTask!
     
     
     /* This method initiates the load request. The connection is asynchronous,
@@ -101,25 +102,59 @@ class URLCacheConnection: NSObject, NSURLConnectionDataDelegate, NSURLConnection
         data. The connection object is owned both by the creator and the
         loading system. */
         
-        self.connection = NSURLConnection(request: theRequest, delegate: self)
-        if self.connection == nil {
-            /* inform the user that the connection failed */
-            let message = NSLocalizedString ("Unable to initiate request.",
-                comment: "NSURLConnection initialization method failed.")
-            throw URLCacheConnectionError.failed(message)
-//            URLCacheAlertWithMessage(message)
-        }
-        
+//        self.connection = NSURLConnection(request: theRequest, delegate: self)
+//        if self.connection == nil {
+//            /* inform the user that the connection failed */
+//            let message = NSLocalizedString ("Unable to initiate request.",
+//                comment: "NSURLConnection initialization method failed.")
+//            throw URLCacheConnectionError.failed(message)
+////            URLCacheAlertWithMessage(message)
+//        }
+        self.dataTask = URLSession(configuration: .default, delegate: self, delegateQueue: OperationQueue.main).dataTask(with: theRequest)
+        self.dataTask.resume()
     }
     
     
     //MARK: NSURLConnection delegate methods
     
-    func connection(_ connection: NSURLConnection, didReceive response: URLResponse) {
+//    func connection(_ connection: NSURLConnection, didReceive response: URLResponse) {
+//        /* This method is called when the server has determined that it has
+//        enough information to create the NSURLResponse. It can be called
+//        multiple times, for example in the case of a redirect, so each time
+//        we reset the data capacity. */
+//        
+//        /* create the NSMutableData instance that will hold the received data */
+//        
+//        var contentLength = response.expectedContentLength
+//        if contentLength == NSURLResponseUnknownLength {
+//            contentLength = 500000
+//        }
+//        self.receivedData = Data(capacity: Int(contentLength))
+//        
+//        /* Try to retrieve last modified date from HTTP header. If found, format
+//        date so it matches format of cached image file modification date. */
+//        
+//        if let response = response as? HTTPURLResponse {
+//            let headers = response.allHeaderFields
+//            if let modified = headers["Last-Modified"] as! String? {
+//                let dateFormatter = DateFormatter()
+//                
+//                /* avoid problem if the user's locale is incompatible with HTTP-style dates */
+//                dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+//                
+//                dateFormatter.dateFormat = "EEE, dd MMM yyyy HH:mm:ss zzz"
+//                self.lastModified = dateFormatter.date(from: modified)
+//            } else {
+//                /* default if last modified date doesn't exist (not an error) */
+//                self.lastModified = Date(timeIntervalSinceReferenceDate: 0)
+//            }
+//        }
+//    }
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive response: URLResponse, completionHandler: @escaping (URLSession.ResponseDisposition) -> Void) {
         /* This method is called when the server has determined that it has
-        enough information to create the NSURLResponse. It can be called
-        multiple times, for example in the case of a redirect, so each time
-        we reset the data capacity. */
+         enough information to create the NSURLResponse. It can be called
+         multiple times, for example in the case of a redirect, so each time
+         we reset the data capacity. */
         
         /* create the NSMutableData instance that will hold the received data */
         
@@ -130,7 +165,7 @@ class URLCacheConnection: NSObject, NSURLConnectionDataDelegate, NSURLConnection
         self.receivedData = Data(capacity: Int(contentLength))
         
         /* Try to retrieve last modified date from HTTP header. If found, format
-        date so it matches format of cached image file modification date. */
+         date so it matches format of cached image file modification date. */
         
         if let response = response as? HTTPURLResponse {
             let headers = response.allHeaderFields
@@ -146,31 +181,52 @@ class URLCacheConnection: NSObject, NSURLConnectionDataDelegate, NSURLConnection
                 /* default if last modified date doesn't exist (not an error) */
                 self.lastModified = Date(timeIntervalSinceReferenceDate: 0)
             }
+            completionHandler(.allow)
+        } else {
+            completionHandler(.cancel)
         }
     }
     
     
-    func connection(_ connection: NSURLConnection, didReceive data: Data) {
+//    func connection(_ connection: NSURLConnection, didReceive data: Data) {
+//        /* Append the new data to the received data. */
+//        self.receivedData?.append(data)
+//    }
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, didReceive data: Data) {
         /* Append the new data to the received data. */
         self.receivedData?.append(data)
     }
     
     
-    func connection(_ connection: NSURLConnection, didFailWithError error: Error) {
+//    func connection(_ connection: NSURLConnection, didFailWithError error: Error) {
+////        URLCacheAlertWithError(error)
+//        self.delegate.connectionDidFail(self, error: error)
+//    }
+    func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
+        session.invalidateAndCancel()
+        self.dataTask = nil
+        if let error = error {
 //        URLCacheAlertWithError(error)
-        self.delegate.connectionDidFail(self, error: error)
+            self.delegate.connectionDidFail(self, error: error)
+        } else {
+            self.delegate.connectionDidFinish(self)
+        }
     }
     
     
-    func connection(_ connection: NSURLConnection, willCacheResponse cachedResponse: CachedURLResponse) -> CachedURLResponse? {
+//    func connection(_ connection: NSURLConnection, willCacheResponse cachedResponse: CachedURLResponse) -> CachedURLResponse? {
+//        /* this application does not use a NSURLCache disk or memory cache */
+//        return nil
+//    }
+    func urlSession(_ session: URLSession, dataTask: URLSessionDataTask, willCacheResponse proposedResponse: CachedURLResponse, completionHandler: @escaping (CachedURLResponse?) -> Void) {
         /* this application does not use a NSURLCache disk or memory cache */
-        return nil
+        completionHandler(nil)
     }
     
     
-    func connectionDidFinishLoading(_ connection: NSURLConnection) {
-        self.delegate.connectionDidFinish(self)
-    }
+//    func connectionDidFinishLoading(_ connection: NSURLConnection) {
+//        self.delegate.connectionDidFinish(self)
+//    }
     
     
 }
