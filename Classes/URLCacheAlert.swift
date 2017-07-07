@@ -63,7 +63,7 @@ import UIKit
 
 
 func URLCacheAlertWithError(_ error: Error) -> UIAlertController {
-    let message = "Error! \(error.localizedDescription) \((error as NSError).localizedFailureReason)"
+    let message = "Error! \(error.localizedDescription) \((error as NSError).localizedFailureReason ?? "")"
     
     return URLCacheAlertWithMessage(message)
 }

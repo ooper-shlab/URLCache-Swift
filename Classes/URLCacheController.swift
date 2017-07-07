@@ -352,7 +352,7 @@ class URLCacheController: UIViewController, URLCacheConnectionDelegate, UIAlertV
         if !FileManager.default.fileExists(atPath: filePath!) {
             /* file doesn't exist, so create it */
             FileManager.default.createFile(atPath: filePath!,
-                contents: theConnection.receivedData as Data?,
+                contents: theConnection.receivedData,
                 attributes: nil)
             
             statusField.text = NSLocalizedString("Newly cached image",
